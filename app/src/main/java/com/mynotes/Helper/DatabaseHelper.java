@@ -73,10 +73,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 NoteModel noteModel = new NoteModel();
-                noteModel.setNoteTitle(cursor.getColumnName(cursor.getColumnIndexOrThrow(CLM_TITLE)));
-                noteModel.setDate(cursor.getColumnName(cursor.getColumnIndexOrThrow(CLM_DATE)));
-                noteModel.setTime(cursor.getColumnName(cursor.getColumnIndexOrThrow(CLM_TIME)));
-                noteModel.setNoteMessage(cursor.getColumnName(cursor.getColumnIndexOrThrow(CLM_MESSAGE)));
+                noteModel.setNoteTitle(cursor.getString(cursor.getColumnIndexOrThrow(CLM_TITLE)));
+                noteModel.setDate(cursor.getString(cursor.getColumnIndexOrThrow(CLM_DATE)));
+                noteModel.setTime(cursor.getString(cursor.getColumnIndexOrThrow(CLM_TIME)));
+                noteModel.setNoteMessage(cursor.getString(cursor.getColumnIndexOrThrow(CLM_MESSAGE)));
                 arrayList.add(noteModel);
                 cursor.moveToNext();
             }
@@ -87,10 +87,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void deleteData(int id){
-        String query = "delete from "+TABLE_NAME +" where "+CLM_ID +" = "+id;
+    public boolean deleteData(String title){
+        String query = "delete from "+TABLE_NAME +" where "+CLM_TITLE +" = "+title;
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(query);
+        return true;
     }
 
     public void deleteTable(){

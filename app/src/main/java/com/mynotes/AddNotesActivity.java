@@ -52,7 +52,6 @@ public class AddNotesActivity extends AppCompatActivity {
             // store to database
             if(helper.insertData(arrayList)){
                 Toast.makeText(this, "Note Saved", Toast.LENGTH_SHORT).show();
-                Log.d("myapp","size: "+helper.getData().toArray().toString());
                 onBackPressed();
             }else{
                 Toast.makeText(this, "Note not saved", Toast.LENGTH_SHORT).show();
